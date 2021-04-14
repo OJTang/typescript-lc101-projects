@@ -10,19 +10,14 @@ var Rocket = /** @class */ (function () {
     }
     Rocket.prototype.sumMass = function (items) {
         var mass = 0;
-        var astroMass = 0;
-        var cargoMass = 0;
-        for (var i = 0; i < this.astronauts.length; i++) {
-            astroMass = astroMass + this.astronauts[i].massKg;
+        for (var i = 0; i < items.length; i++) {
+            mass = mass + items[i].massKg;
         }
-        for (var k = 0; k < this.cargoItems.length; k++) {
-            cargoMass = cargoMass + this.cargoItems[k].massKg;
-        }
-        mass = cargoMass + astroMass;
         return mass;
     };
     Rocket.prototype.currentMassKg = function () {
-        return this.sumMass(this.astronauts);
+        var currentMass = this.sumMass(this.astronauts) + this.sumMass(this.cargoItems);
+        return currentMass;
     };
     Rocket.prototype.canAdd = function (item) {
         if ((this.currentMassKg() + item.massKg) <= this.totalCapacityKg) {

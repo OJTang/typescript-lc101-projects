@@ -14,20 +14,15 @@ export class Rocket {
         this.astronauts = [];
     }
     sumMass( items: Payload[] ): number {
-        let mass: number = 0;
-        let astroMass: number = 0;
-        let cargoMass: number = 0;
-        for (let i: number = 0; i < this.astronauts.length; i++) {
-            astroMass = astroMass + this.astronauts[i].massKg;
+        let mass: number = 0; 
+        for (let i: number = 0; i < items.length; i++) {
+            mass = mass + items[i].massKg;
         }
-        for (let k: number = 0; k < this.cargoItems.length; k++) {
-            cargoMass = cargoMass + this.cargoItems[k].massKg;
-        }
-        mass = cargoMass + astroMass;
         return mass;
     }
     currentMassKg(): number {
-        return this.sumMass(this.astronauts);
+        let currentMass: number = this.sumMass(this.astronauts) + this.sumMass(this.cargoItems);
+        return currentMass;
     }
     canAdd(item: Payload): boolean {
         if ((this.currentMassKg() + item.massKg) <= this.totalCapacityKg){
